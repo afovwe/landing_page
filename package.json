@@ -1,0 +1,25 @@
+{
+  "name": "apple-clone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon api/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node api/index.js",
+    "build": "npm install && npm install --prefix client && npm run build --prefix client"
+  },
+  "keywords": [
+    "iphone"
+  ],
+  "author": "omofovwe akpadaka",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.3"
+  }
+}
