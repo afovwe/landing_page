@@ -43,8 +43,8 @@ const connectDB = async () => {
 connectDB();
 
 // Serve static files from the 'dist' directory
-// const __dirname = path.resolve();
-// app.use(express.static(path.join(__dirname, '/client/dist')));
+ const __dirname = path.resolve();
+ app.use(express.static(path.join(__dirname, '/client/dist')));
 
 // Use routes
 app.use('/api', userRouter);
@@ -56,9 +56,9 @@ app.use('/api', managementRoutes);
 app.use('/api', salesRoutes);
 
 // Serve the index.html file for any other requests
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
-// });
+ app.get('*', (req, res) => {
+   res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
+});
 
 // Start the server
 app.listen(port, () => {
