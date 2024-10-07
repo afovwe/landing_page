@@ -1,8 +1,12 @@
+import DashboardNavBar from "../components/DashboardNavBar"
 
 
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
+    <section>
+      <DashboardNavBar />
+      <div>Dashboard Content Here!!!</div>
+    </section>
   )
 }
 
