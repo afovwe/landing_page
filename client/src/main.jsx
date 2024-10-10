@@ -5,12 +5,22 @@ import {  createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import './index.css';
 import App from './App';
+import { configureStore } from "@reduxjs/toolkit";
+import globalReducer from "./state";
+import { Provider } from "react-redux";
 import Dashboard from './pages/Dashboard';
 import ProfilePage from './pages/ProfilePage';
 import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
+import DashboardItem from './pages/DashboardItem';
 
-
+const store = configureStore({
+  reducer: {
+    global: globalReducer,
+   
+  },
+ 
+});
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,7 +30,13 @@ const router = createBrowserRouter([
   },
     {
     path: "/dashboard",
-    element: <Dashboard />,   
+    element: <Dashboard />, 
+    children: [
+      {
+    path: "/dashboard/:itemId",
+    element: <DashboardItem />, 
+    },
+  ] 
     
   },
     {
@@ -40,6 +56,8 @@ const router = createBrowserRouter([
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>      
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>,
 );
