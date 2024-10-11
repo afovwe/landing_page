@@ -24,8 +24,7 @@ import {
   MenuItem,
   useTheme, // Import useTheme
 } from "@mui/material";
-
-const DashboardNavBar = () => {
+const DashboardNavBar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const theme = useTheme(); // Get the theme object
   const dispatch = useDispatch(); // Initialize dispatch
 
@@ -40,7 +39,7 @@ const DashboardNavBar = () => {
       <Toolbar sx={{ justifyContent: "space-between" }}>
         {/* LEFT SIDE */}
         <FlexBetween>
-          <IconButton onClick={() => console.log('open/close sidebar')}>
+          <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
             <MenuIcon />
           </IconButton>
           <FlexBetween
@@ -73,5 +72,6 @@ const DashboardNavBar = () => {
     </AppBar>
   );
 };
+
 
 export default DashboardNavBar;
