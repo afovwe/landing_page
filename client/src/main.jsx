@@ -13,14 +13,18 @@ import ProfilePage from './pages/ProfilePage';
 import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
 import DashboardItem from './pages/DashboardItem';
+import { setupListeners } from "@reduxjs/toolkit/query";
+import { api } from "./state/api";
 
 const store = configureStore({
   reducer: {
     global: globalReducer,
-   
+    [api.reducerPath]: api.reducer,
   },
- 
+  middleware: (getDefault) => getDefault().concat(api.middleware),
 });
+setupListeners(store.dispatch);
+
 const router = createBrowserRouter([
   {
     path: "/",
