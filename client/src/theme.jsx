@@ -1,19 +1,21 @@
 // color design tokens export
 export const tokensDark = {
   grey: {
-    0: "#ffffff", // manually adjusted
-    10: "#f6f6f6", // manually adjusted
-    50: "#f0f0f0", // manually adjusted
-    100: "#e0e0e0",
-    200: "#c2c2c2",
-    300: "#a3a3a3",
-    400: "#858585",
-    500: "#666666",
-    600: "#525252",
-    700: "#3d3d3d",
-    800: "#292929",
-    900: "#141414",
-    1000: "#000000", // manually adjusted
+   // coral red shades for light and dark mode
+  0: "#ffffff", // manually adjusted (lightest)
+  10: "#ffe5e5", // very light coral red
+  50: "#ffcccc", // light coral red
+  100: "#ff9999", // soft coral red
+  200: "#ff6666", // coral red light
+  300: "#ff4040", // coral red base
+  400: "#cc3333", // dark coral red
+  500: "#992626", // deeper coral red
+  600: "#661a1a", // darker coral red
+  700: "#4d0f0f", // very dark coral red
+  800: "#330d0d", // near black coral red
+  900: "#1a0a0a", // extremely dark coral red
+  1000: "#000000" // manually adjusted (black)
+
   },
   primary: {
     // blue
@@ -28,17 +30,19 @@ export const tokensDark = {
     900: "#070812",
   },
   secondary: {
-    // yellow
-    50: "#f0f0f0", // manually adjusted
-    100: "#fff6e0",
-    200: "#ffedc2",
-    300: "#ffe3a3",
-    400: "#ffda85",
-    500: "#ffd166",
-    600: "#cca752",
-    700: "#997d3d",
-    800: "#665429",
-    900: "#332a14",
+  
+   // coral red shades
+50: "#ffe5e5", // lightest shade, manually adjusted
+100: "#ffcccc",
+200: "#ff9999",
+300: "#ff6666",
+400: "#ff4d4d",
+500: "#ff4040", // base coral red
+600: "#cc3333",
+700: "#992626",
+800: "#661a1a",
+900: "#330d0d", // darkest shade
+
   },
 };
 
