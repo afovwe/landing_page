@@ -1,15 +1,12 @@
-import { Link } from "react-router-dom"
-import DashboardNavBar from "../components/DashboardNavBar"
-
+import { Link } from "react-router-dom";
 
 const NotFound = () => {
   return (
-     <section>
-      <DashboardNavBar />
-      <h1>404 Page not found </h1>
-      <Link to="/">Back to home</Link>
+    <section>
+       <h1>404 The page you requested is Page not found</h1>
+      <Link to="/dashboard">Back to the Dashboard</Link>
     </section>
-  )
-}
+  );
+};
 
-export default NotFound
+export default NotFound;
