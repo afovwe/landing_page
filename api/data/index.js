@@ -2339,6 +2339,7 @@ export const dataProduct = [
     rating: 4.1,
     supply: 655,
   },
+  
   {
     _id: "63701d24f03239b7f7000015",
     name: "Loleta Meach",
