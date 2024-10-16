@@ -13,17 +13,32 @@ import generalRoutes from './routes/general.js';
 import managementRoutes from './routes/management.js';
 import salesRoutes from './routes/sales.js';
 import navigationRouter from './routes/navigation.route.js';
-//for data bck insert
-//import seedProduct from "./routes/seedProduct.js"; 
-//import seedProductStat from "./routes/seedProductStat.js";
+// for data back insert
+// import seedProduct from "./routes/seedProduct.js"; 
+// import seedProductStat from "./routes/seedProductStat.js";
 
 dotenv.config();
 
 /* CONFIGURATION */
 const app = express();
 app.use(express.json());
-app.use(helmet());
-app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
+
+// Configure Helmet with Content Security Policy
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        connectSrc: ["'self'", "http://localhost:5001"],
+        styleSrc: ["'self'", "https://fonts.googleapis.com"],
+        fontSrc: ["'self'", "https://fonts.gstatic.com"],
+        // You can add more directives if needed
+      },
+    },
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+  })
+);
+
 app.use(morgan('common'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -56,8 +71,8 @@ app.use('/api', clientRoutes);
 app.use('/api', generalRoutes);
 app.use('/api', managementRoutes);
 app.use('/api', salesRoutes);
-//app.use('/api', seedProduct);
-//app.use('/api', seedProductStat);
+// app.use('/api', seedProduct);
+// app.use('/api', seedProductStat);
 
 // Serve the index.html file for any other requests
 app.get('*', (req, res) => {
