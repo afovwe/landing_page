@@ -23,8 +23,8 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-// Configure Helmet with Content Security Policy
-
+app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 
 app.use(morgan('common'));
 app.use(bodyParser.json());
