@@ -24,20 +24,7 @@ const app = express();
 app.use(express.json());
 
 // Configure Helmet with Content Security Policy
-app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        connectSrc: ["'self'", "http://localhost:5001"],
-        styleSrc: ["'self'", "https://fonts.googleapis.com"],
-        fontSrc: ["'self'", "https://fonts.gstatic.com"],
-        // You can add more directives if needed
-      },
-    },
-    crossOriginResourcePolicy: { policy: 'cross-origin' },
-  })
-);
+
 
 app.use(morgan('common'));
 app.use(bodyParser.json());
