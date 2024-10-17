@@ -31,7 +31,7 @@ import {
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
-import { profileImage } from "../assets/images";
+import { profileImage, headerLogo } from "../assets/images";
 
 const navItems = [
   {
@@ -132,7 +132,15 @@ const Sidebar = ({
               <FlexBetween color={theme.palette.secondary.main}>
                 <Box display="flex" alignItems="center" gap="0.5rem">
                   <Typography variant="h4" fontWeight="bold">
-                    LOGO
+                   <a href='/'>
+          <img
+            src={headerLogo}
+            alt='logo'
+            width={129}
+            height={29}
+            className='m-0 w-[129px] h-[29px]'
+          />
+        </a>
                   </Typography>
                 </Box>
                 {!isNonMobile && (

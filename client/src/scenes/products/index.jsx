@@ -1,5 +1,4 @@
-import  { useState, useMemo } from "react";
-import { useSelector } from "react-redux";
+import  { useState} from "react";
 import {
   Box,
   Card,
