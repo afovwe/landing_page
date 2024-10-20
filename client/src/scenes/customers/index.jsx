@@ -7,9 +7,8 @@ import { useGetCustomersQuery } from "../../state/api";
 const Customers = () => {
   const theme = useTheme();
   const { data, isLoading } = useGetCustomersQuery();
-  console.log("data", data);
-
-   const columns = [
+  //console.log("data", data);
+  const columns = [
     {
       field: "_id",
       headerName: "ID",
@@ -50,13 +49,14 @@ const Customers = () => {
     },
   ];
 
-   return (
-   <Box m="1.5rem 2.5rem">
-      <Header title="CUSTOMERS" subtitle="List of Customers" />
-      <Box
-        mt="40px"
-        height="75vh"
-        sx={{
+  
+  return ( 
+     <Box m="1.5rem 2.5rem">
+        <Header title="CUSTOMERS" subtitle="List of Customers" />
+        <Box
+          mt="40px"
+          height="75vh"
+           sx={{
           "& .MuiDataGrid-root": {
             border: "none",
           },
@@ -80,16 +80,17 @@ const Customers = () => {
             color: `${theme.palette.secondary[200]} !important`,
           },
         }}
-      >
-        <DataGrid
-          loading={isLoading || !data}
+        >
+          <DataGrid 
+           loading={isLoading || !data}
           getRowId={(row) => row._id}
           rows={data || []}
           columns={columns}
-        />
-      </Box>
-    </Box> 
- )
-}
+          />
+        </Box>
+     </Box>
+)
+
+};
 
 export default Customers

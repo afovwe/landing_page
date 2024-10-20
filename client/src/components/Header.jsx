@@ -1,6 +1,8 @@
+import PropTypes from 'prop-types';
 import { Typography, Box, useTheme } from "@mui/material";
-const Header = ({ title, subtitle })  => {
-   const theme = useTheme();
+
+const Header = ({ title, subtitle }) => {
+  const theme = useTheme();
   return (
     <Box>
       <Typography
@@ -16,6 +18,12 @@ const Header = ({ title, subtitle })  => {
       </Typography>
     </Box>
   );
-}
+};
 
-export default Header
+// PropTypes validation
+Header.propTypes = {
+  title: PropTypes.string.isRequired,    // 'title' should be a string and is required
+  subtitle: PropTypes.string.isRequired, // 'subtitle' should be a string and is required
+};
+
+export default Header;

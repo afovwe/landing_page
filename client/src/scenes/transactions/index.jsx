@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Box, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
+
 import { useGetTransactionsQuery } from "../../state/api";
 import DataGridCustomToolbar from "../../components/DataGridCustomToolbar";
 import Header from "../../components/Header";
@@ -14,7 +15,6 @@ const Transactions = () => {
   const [pageSize, setPageSize] = useState(20);
   const [sort, setSort] = useState({});
   const [search, setSearch] = useState("");
-
   const [searchInput, setSearchInput] = useState("");
   const { data, isLoading } = useGetTransactionsQuery({
     page,
