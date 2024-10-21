@@ -22,6 +22,7 @@ import Admin from './scenes/admin';
 import Transactions from './scenes/transactions';
 import Geography from './scenes/geography';
 import Overview from './scenes/overview';
+import Daily from './scenes/daily';
 
 const store = configureStore({
   reducer: {
@@ -80,6 +81,16 @@ const router = createBrowserRouter([
       {
         path: "", // Matches "/products"
         element: <Overview />,
+      },
+    ],
+  },
+  {
+    path: "/daily",
+    element: <Layout />, // Use Layout for the products section
+    children: [
+      {
+        path: "", // Matches "/products"
+        element: <Daily />,
       },
     ],
   },
