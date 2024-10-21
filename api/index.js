@@ -18,6 +18,9 @@ import navigationRouter from './routes/navigation.route.js';
 //import seedProduct from "./routes/seedProduct.js"; 
 //import seedProductStat from "./routes/seedProductStat.js";
 //import seedTransactions from "./routes/seedTransactions.js"
+//import { dataOverallStat} from './data/index.js'
+//import OverallStat from './models/ModelOverallStat.js';
+import seedOverviewStat from "./routes/seedOverviewStat.js"
 
 dotenv.config();
 
@@ -61,6 +64,7 @@ app.use('/api', salesRoutes);
 //app.use('/api', seedProduct);
 //app.use('/api', seedProductStat);
 //app.use('/api', seedTransactions);
+app.use('/api', seedOverviewStat);
 
 // Serve the index.html file for any other requests
 app.get('*', (req, res) => {
@@ -70,4 +74,5 @@ app.get('*', (req, res) => {
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
+  //OverallStat.insertMany(dataOverallStat);
 });

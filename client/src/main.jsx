@@ -21,6 +21,7 @@ import Customers from './scenes/customers';
 import Admin from './scenes/admin';
 import Transactions from './scenes/transactions';
 import Geography from './scenes/geography';
+import Overview from './scenes/overview';
 
 const store = configureStore({
   reducer: {
@@ -72,6 +73,17 @@ const router = createBrowserRouter([
       },
     ],
   },
+   {
+    path: "/overview",
+    element: <Layout />, // Use Layout for the products section
+    children: [
+      {
+        path: "", // Matches "/products"
+        element: <Overview />,
+      },
+    ],
+  },
+  
   {
     path: "/admin",
     element: <Layout />, // Use Layout for the products section
