@@ -24,6 +24,7 @@ import Geography from './scenes/geography';
 import Overview from './scenes/overview';
 import Daily from './scenes/daily';
 import Monthly from './scenes/monthly';
+import Breakdown from './scenes/breakdown';
 
 const store = configureStore({
   reducer: {
@@ -105,7 +106,16 @@ const router = createBrowserRouter([
       },
     ],
   },
-  
+  {
+    path: "/breakdown",
+    element: <Layout />, // Use Layout for the products section
+    children: [
+      {
+        path: "", // Matches "/products"
+        element: <Breakdown />,
+      },
+    ],
+  },
   {
     path: "/admin",
     element: <Layout />, // Use Layout for the products section
