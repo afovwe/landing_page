@@ -16,7 +16,7 @@ export const getUserPerformance = async (req, res) => {
     const { id } = req.params;
 
     const userWithStats = await User.aggregate([
-      { $match: { _id: new mongoose.Types.ObjectId(id) } },
+      { $match: { _id: mongoose.Types.ObjectId(id) } }, // Updated without 'new'
       {
         $lookup: {
           from: "affiliatestats",
@@ -33,13 +33,15 @@ export const getUserPerformance = async (req, res) => {
         return Transaction.findById(id);
       })
     );
+
     const filteredSaleTransactions = saleTransactions.filter(
       (transaction) => transaction !== null
     );
 
-    res
-      .status(200)
-      .json({ user: userWithStats[0], sales: filteredSaleTransactions });
+    res.status(200).json({
+      user: userWithStats[0],
+      sales: filteredSaleTransactions,
+    });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

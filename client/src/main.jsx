@@ -8,12 +8,12 @@ import App from './App';
 import { configureStore } from "@reduxjs/toolkit";
 import globalReducer from "./state";
 import { Provider } from "react-redux";
-import Dashboard from './pages/Dashboard';
+//import Dashboard from './scenes/dashboard/Dashboard';
 import Layout from './scenes/layout';
 import ProfilePage from './pages/ProfilePage';
 import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
-import DashboardItem from './pages/DashboardItem';
+//import DashboardItem from './pages/DashboardItem';
 import Products from './scenes/products';
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { api } from "./state/api";
@@ -25,6 +25,8 @@ import Overview from './scenes/overview';
 import Daily from './scenes/daily';
 import Monthly from './scenes/monthly';
 import Breakdown from './scenes/breakdown';
+import Performance from './scenes/performance'; 
+import Dashboard from './scenes/dashboard';
 
 const store = configureStore({
   reducer: {
@@ -50,10 +52,10 @@ const router = createBrowserRouter([
         path: "", // Matches "/dashboard"
         element: <Dashboard />,
       },
-      {
+      /* {
         path: ":itemId", // Matches "/dashboard/:itemId"
         element: <DashboardItem />,
-      },
+      }, */
     ],
   },
   {
@@ -71,7 +73,7 @@ const router = createBrowserRouter([
     element: <Layout />, // Use Layout for the products section
     children: [
       {
-        path: "", // Matches "/products"
+        path: "", // Matches "/customers"
         element: <Customers />,
       },
     ],
@@ -81,7 +83,7 @@ const router = createBrowserRouter([
     element: <Layout />, // Use Layout for the products section
     children: [
       {
-        path: "", // Matches "/products"
+        path: "", // Matches "/overview"
         element: <Overview />,
       },
     ],
@@ -91,7 +93,7 @@ const router = createBrowserRouter([
     element: <Layout />, // Use Layout for the products section
     children: [
       {
-        path: "", // Matches "/products"
+        path: "", // Matches "/daily"
         element: <Daily />,
       },
     ],
@@ -101,7 +103,7 @@ const router = createBrowserRouter([
     element: <Layout />, // Use Layout for the products section
     children: [
       {
-        path: "", // Matches "/products"
+        path: "", // Matches "/monthly"
         element: <Monthly />,
       },
     ],
@@ -111,7 +113,7 @@ const router = createBrowserRouter([
     element: <Layout />, // Use Layout for the products section
     children: [
       {
-        path: "", // Matches "/products"
+        path: "", // Matches "/breakdown"
         element: <Breakdown />,
       },
     ],
@@ -121,8 +123,18 @@ const router = createBrowserRouter([
     element: <Layout />, // Use Layout for the products section
     children: [
       {
-        path: "", // Matches "/products"
+        path: "", // Matches "/admin"
         element: <Admin />,
+      },
+    ],
+  },
+  {
+    path: "/performance",
+    element: <Layout />, // Use Layout for the products section
+    children: [
+      {
+        path: "", // Matches "/customers"
+        element: <Performance />,
       },
     ],
   },
