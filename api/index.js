@@ -7,6 +7,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 import path from 'path';
+
 import userRouter from './routes/user.route.js';
 import clientRoutes from './routes/client.js';
 import generalRoutes from './routes/general.js';

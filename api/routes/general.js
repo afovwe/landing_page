@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 router.get("/general/user/:id", getUser);
-router.get("/dashboard", getDashboardStats);
+router.get("/general/dashboard", getDashboardStats);
 
 
 export default router;
