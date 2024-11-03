@@ -11,6 +11,7 @@ import DashboardNavBar from '../../components/DashboardNavBar'
 import Sidebar from "../../components/Sidebar";
 import { useGetUserQuery } from "../../state/api";
 
+
 const Layout = () => {
   const mode = useSelector((state) => state.global.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);

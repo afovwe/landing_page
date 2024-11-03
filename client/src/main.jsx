@@ -27,7 +27,13 @@ import Monthly from './scenes/monthly';
 import Breakdown from './scenes/breakdown';
 import Performance from './scenes/performance'; 
 import Dashboard from './scenes/dashboard';
+import { ClerkProvider } from '@clerk/clerk-react'
+// Import your publishable key
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
+if (!PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key")
+}
 const store = configureStore({
   reducer: {
     global: globalReducer,
@@ -188,8 +194,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider store={store}>      
+     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+      <Provider store={store}>      
       <RouterProvider router={router} />
     </Provider>
+     </ClerkProvider>
   </React.StrictMode>,
 );

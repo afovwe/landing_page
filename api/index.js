@@ -22,7 +22,7 @@ import navigationRouter from './routes/navigation.route.js';
 //import { dataOverallStat} from './data/index.js'
 //import OverallStat from './models/ModelOverallStat.js';
 //import seedOverviewStat from "./routes/seedOverviewStat.js"
-import seedAffilateStat from "./routes/seedAffilate.js"
+//import seedAffilateStat from "./routes/seedAffilate.js"
 
 dotenv.config();
 
@@ -67,7 +67,7 @@ app.use('/api', salesRoutes);
 //app.use('/api', seedProductStat);
 //app.use('/api', seedTransactions);
 //app.use('/api', seedOverviewStat);
-app.use('/api', seedAffilateStat);
+//app.use('/api', seedAffilateStat);
 
 // Serve the index.html file for any other requests
 app.get('*', (req, res) => {

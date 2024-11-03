@@ -3,6 +3,7 @@ import { getAdmins, getUserPerformance } from "../controllers/management.control
 
 const router = express.Router();
 
+
 router.get("/management/admins", getAdmins);
 router.get("/management/performance/:id", getUserPerformance);
 
