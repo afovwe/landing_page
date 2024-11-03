@@ -7,19 +7,25 @@ export const navLinks = [
     { href: "#products", label: "Products" },
     { href: "#contact-us", label: "Contact Us" },
 ];
-
 export const shoes = [
     {
         thumbnail: thumbnailShoe1,
         bigShoe: bigShoe1,
+		alt: 'shoe colletion',
+		order: 1,
+		
     },
     {
         thumbnail: thumbnailShoe2,
         bigShoe: bigShoe2,
+		alt: 'shoe colletion two',
+		order: 2
     },
     {
         thumbnail: thumbnailShoe3,
         bigShoe: bigShoe3,
+		alt: 'shoe colletion three',
+		order: 3,
     },
 ];
 

@@ -28,6 +28,8 @@ import Breakdown from './scenes/breakdown';
 import Performance from './scenes/performance'; 
 import Dashboard from './scenes/dashboard';
 import { ClerkProvider } from '@clerk/clerk-react'
+import HeroAdminSection from './scenes/manage_hero_section';
+
 // Import your publishable key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
@@ -74,6 +76,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+
    {
     path: "/customers",
     element: <Layout />, // Use Layout for the products section
@@ -161,6 +164,16 @@ const router = createBrowserRouter([
       {
         path: "", // Matches "/products"
         element: <Geography />,
+      },
+    ],
+  },
+  {
+    path: "/manage",
+    element: <Layout />, // Use Layout for the products section
+    children: [
+      {
+        path: "", // Matches "/products"
+        element: <HeroAdminSection />,
       },
     ],
   },

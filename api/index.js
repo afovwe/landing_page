@@ -14,6 +14,8 @@ import generalRoutes from './routes/general.js';
 import managementRoutes from './routes/management.js';
 import salesRoutes from './routes/sales.js';
 import navigationRouter from './routes/navigation.route.js';
+
+import heroSectionRoutes from './routes/heroSectionRoutes.js';
 //import seedTransactions from './routes/seedTransactions.js'
 //for data bck insert
 //import seedProduct from "./routes/seedProduct.js"; 
@@ -63,11 +65,14 @@ app.use('/api', clientRoutes);
 app.use('/api', generalRoutes);
 app.use('/api', managementRoutes);
 app.use('/api', salesRoutes);
+app.use('/api', heroSectionRoutes);
 //app.use('/api', seedProduct);
 //app.use('/api', seedProductStat);
 //app.use('/api', seedTransactions);
 //app.use('/api', seedOverviewStat);
 //app.use('/api', seedAffilateStat);
+
+
 
 // Serve the index.html file for any other requests
 app.get('*', (req, res) => {

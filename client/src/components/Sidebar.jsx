@@ -90,6 +90,14 @@ const navItems = [
     text: "Performance",
     icon: <TrendingUpOutlined />,
   },
+   {
+    text: "Landing Page",
+    icon: null,
+  },
+   {
+    text: "Manage",
+    icon: <AdminPanelSettingsOutlined />,
+  },
 ];
 
 const Sidebar = ({
