@@ -55,6 +55,10 @@ export const api = createApi({
       query: () => "api/general/dashboard",
       providesTags: ["Dashboard"],
     }),
+    /* getActiveHeroSection: build.query({
+      query: (id) => `api/management/performance/${id}`,
+      providesTags: ["Performance"],
+    }), */
   }),
 });
 

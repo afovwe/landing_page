@@ -1,4 +1,3 @@
-
 import mongoose from 'mongoose';
 
 // Define the schema for individual shoe entries
@@ -23,7 +22,8 @@ const heroCollectionSchema = new mongoose.Schema({
   type: { type: String, required: true },
   description: { type: String, required: true },
   statistics: [statisticSchema],
-  shoes: [shoeSchema]
+  shoes: [shoeSchema],
+  active: { type: Boolean, default: false },
 }, { timestamps: true });
 
 // Create and export the Collection model

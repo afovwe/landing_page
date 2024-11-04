@@ -1,7 +1,8 @@
 import HeroSection from '../models/ModelLandingPageProductHeroSection.js';
+
 export const createHeroSection = async (req, res) => {
   try {
-    const { seasonalLabel, title, make, type, description, statistics, shoes } = req.body;
+    const { seasonalLabel, title, make, type, description, statistics, shoes, active } = req.body;
 
     // Validate that statistics and shoes are arrays
     if (!Array.isArray(statistics) || !Array.isArray(shoes)) {
@@ -29,7 +30,8 @@ export const createHeroSection = async (req, res) => {
       type,
       description,
       statistics,
-      shoes
+      shoes,
+      active: active !== undefined ? active : false // Set active to false if not provided
     });
 
     // Save to database
@@ -41,7 +43,7 @@ export const createHeroSection = async (req, res) => {
   }
 };
 
-// Get all HeroSections
+// Get all HeroSe ctions 
 export const getAllHeroSections = async (req, res) => {
   try {
     const heroSections = await HeroSection.find();

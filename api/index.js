@@ -59,6 +59,7 @@ const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, '/client/dist')));
 
 // Use routes
+
 app.use('/api', userRouter);
 app.use('/api', navigationRouter);
 app.use('/api', clientRoutes);
@@ -71,6 +72,7 @@ app.use('/api', heroSectionRoutes);
 //app.use('/api', seedTransactions);
 //app.use('/api', seedOverviewStat);
 //app.use('/api', seedAffilateStat);
+
 
 
 

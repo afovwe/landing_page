@@ -9,19 +9,15 @@ import {
 
 const router = express.Router();
 
-// Route to create a new hero section
-router.post('/hero-section', createHeroSection);
+router
+  .route('/hero-section')
+  .get(getAllHeroSections)       // Get all hero sections
+  .post(createHeroSection);       // Create a new hero section
 
-// Route to get all hero sections
-router.get('/hero-section', getAllHeroSections);
-
-// Route to get a single hero section by ID
-router.get('/hero-section/:id', getHeroSectionById);
-
-// Route to update a hero section by ID
-router.put('/hero-section/:id', updateHeroSection);
-
-// Route to delete a hero section by ID
-router.delete('/hero-section/:id', deleteHeroSection);
+router
+  .route('/hero-section/:id')
+  .get(getHeroSectionById)        // Get a single hero section by ID
+  .put(updateHeroSection)         // Update a hero section by ID
+  .delete(deleteHeroSection);     // Delete a hero section by ID
 
 export default router;
