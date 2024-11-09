@@ -8,8 +8,8 @@ import { useGetActiveHeroSectionByIdQuery } from "../state/api"; //../../state/a
 
 const Hero = () => {
   // Fetch active hero section by ID
-  const { data: activeHeroSectionData, isLoading: isLoadingActiveHeroSection, error: activeHeroSectionError } = useGetActiveHeroSectionByIdQuery("6729375c7e4f7cc1e010e7f8");
-  console.log("Active Hero Section data on the landing page:", activeHeroSectionData);
+  const { data: activeHeroSectionData, isLoading: isLoadingActiveHeroSection, error: activeHeroSectionError } = useGetActiveHeroSectionByIdQuery();
+ 
 
   if (activeHeroSectionError) {
     console.error("Error fetching active hero section:", activeHeroSectionError);
@@ -26,7 +26,7 @@ useEffect(() => {
 }, [activeHeroSectionData]);
 
   if (isLoadingActiveHeroSection || !activeHeroSectionData) {
-    return <p>Loading...</p>;
+    return <p className="text-center">Loading...</p>;
   }
 
   return (

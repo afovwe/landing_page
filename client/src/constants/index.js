@@ -51,6 +51,7 @@ export const products = [
         name: "Nike Air Jordan-100",
         price: "$220.20",
     },
+    
     {
         imgURL: shoe7,
         name: "Nike Air Jordan-001",

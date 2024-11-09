@@ -66,9 +66,30 @@ export const getActiveHeroSectionById = async (req, res) => {
     res.status(200).json(activeHeroSection);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Failed to fetch active hero section' });
+    res.status(500).json({ message: ' fetch active hero section' });
   }
 };
+
+// Controller to fetch only active hero section
+
+export const getActiveHeroSection = async (req, res) => {
+  try {
+    // Adding a console log to check the request params
+    console.log(req.params);
+
+    const activeHero = await HeroSection.findOne({ active: true });
+
+    if (!activeHero) {
+      return res.status(404).json({ message: 'No active hero section found' });
+    }
+
+    return res.status(200).json(activeHero);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Server Error' });
+  }
+};
+
 // Get a single HeroSection by ID
 export const getHeroSectionById = async (req, res) => {
   try {
