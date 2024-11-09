@@ -47,10 +47,11 @@ setupListeners(store.dispatch);
 
 
 const router = createBrowserRouter([
+
   {
     path: "/",
     element: <App />, // The main frontend website component
-    errorElement: <NotFound />, // Optional: Remove this if you want to handle the NotFound page under the Layout component
+  
   },
   {
     path: "/dashboard",
