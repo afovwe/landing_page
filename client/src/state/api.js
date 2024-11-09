@@ -13,6 +13,10 @@ export const api = createApi({
     "Admins",
     "Performance",
     "Dashboard",
+    "CreateHeroSection",
+    "HeroSection", 
+    "ActiveHeroSection",
+    "InactiveHeroSection"
   ],
   endpoints: (build) => ({
     getUser: build.query({
@@ -55,10 +59,26 @@ export const api = createApi({
       query: () => "api/general/dashboard",
       providesTags: ["Dashboard"],
     }),
-    /* getActiveHeroSection: build.query({
-      query: (id) => `api/management/performance/${id}`,
-      providesTags: ["Performance"],
-    }), */
+    getCreateHeroSection: build.query({
+      query: () => "api/herosections/new", 
+      providesTags: ["CreateHeroSection"], // Add this line for tag consistency
+    }),
+    getHeroSections: build.query({
+      query: () => "api/herosections/all-herosections", 
+      providesTags: ["HeroSection"], // Unified tag for consistency
+    }),
+    getHeroSectionById: build.query({
+      query: (id) => `api/herosections/${id}`, 
+      providesTags: ["HeroSection"],
+    }),
+    getActiveHeroSectionById: build.query({ //herosections/active/
+      query: (id) => `api/herosections/active/${id}`, 
+      providesTags: ["ActiveHeroSection"],
+    }),
+    getInactiveHeroSections: build.query({
+      query: () => "api/herosections/inactive", 
+      providesTags: ["InactiveHeroSection"],
+    }),
   }),
 });
 
@@ -72,4 +92,9 @@ export const {
   useGetAdminsQuery,
   useGetUserPerformanceQuery,
   useGetDashboardQuery,
+  useGetCreateHeroSectionQuery,
+  useGetHeroSectionsQuery,       // Standardized to avoid redundancy
+  useGetHeroSectionByIdQuery,
+  useGetActiveHeroSectionByIdQuery,
+  useGetInactiveHeroSectionsQuery,
 } = api;

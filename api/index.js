@@ -62,11 +62,11 @@ app.use(express.static(path.join(__dirname, '/client/dist')));
 
 app.use('/api', userRouter);
 app.use('/api', navigationRouter);
-app.use('/api', clientRoutes);
-app.use('/api', generalRoutes);
-app.use('/api', managementRoutes);
-app.use('/api', salesRoutes);
-app.use('/api', heroSectionRoutes);
+app.use('/api/client', clientRoutes);
+app.use('/api/general', generalRoutes);
+app.use('/api/management', managementRoutes);
+app.use('/api/sales', salesRoutes);
+app.use('/api/herosections', heroSectionRoutes);
 //app.use('/api', seedProduct);
 //app.use('/api', seedProductStat);
 //app.use('/api', seedTransactions);

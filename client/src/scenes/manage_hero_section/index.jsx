@@ -7,12 +7,27 @@ import {
   IconButton,
   Grid
 } from '@mui/material';
-
-
+import { useGetHeroSectionsQuery, useGetActiveHeroSectionByIdQuery } from "../../state/api";
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const HeroAdminSection = ({ onSubmit }) => {
+  // Fetch hero sections
+  const { data: heroSectionsData, isLoading: isLoadingHeroSections, error: heroSectionsError } = useGetHeroSectionsQuery();
+  console.log("Hero Sections data:", heroSectionsData);
+  console.log("Hero Sections loading:", isLoadingHeroSections);
+  if (heroSectionsError) {
+    console.error("Error fetching hero sections:", heroSectionsError);
+  }
+
+  // Fetch active hero section by ID
+  const { data: activeHeroSectionData, isLoading: isLoadingActiveHeroSection, error: activeHeroSectionError } = useGetActiveHeroSectionByIdQuery("6729375c7e4f7cc1e010e7f8");
+  console.log("Active Hero Section data:", activeHeroSectionData);
+  console.log("Active Hero Section loading:", isLoadingActiveHeroSection);
+  if (activeHeroSectionError) {
+    console.error("Error fetching active hero section:", activeHeroSectionError);
+  }
+
   const [formValues, setFormValues] = useState({
     seasonalLabel: '',
     title: '',

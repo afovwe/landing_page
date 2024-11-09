@@ -3,7 +3,17 @@ import { shoes, statistics } from "../constants";
 import { Button, ShoeCard } from "../components";
 import { arrowRight } from "../assets/icons";
 
+import { useGetActiveHeroSectionByIdQuery } from "../state/api"; //../../state/api
+
+
 const Hero = () => {
+   // Fetch active hero section by ID
+  const { data: activeHeroSectionData, isLoading: isLoadingActiveHeroSection, error: activeHeroSectionError } = useGetActiveHeroSectionByIdQuery("6729375c7e4f7cc1e010e7f8");
+  console.log("Active Hero Section data on the landing page:", activeHeroSectionData);
+  console.log("Active Hero Section loading:", isLoadingActiveHeroSection);
+  if (activeHeroSectionError) {
+    console.error("Error fetching active hero section:", activeHeroSectionError);
+  }
   // Sort shoes by order and set the initial bigShoe to the first one in sorted order
   const sortedShoes = shoes.sort((a, b) => a.order - b.order);
   const [bigShoe, setBigShoe] = useState(sortedShoes[0]);

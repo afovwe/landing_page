@@ -8,9 +8,9 @@ import {
 
 const router = express.Router();
 
-router.get("/client/products", getProducts);
-router.get("/client/customers", getCustomers);
-router.get("/client/transactions", getTransactions);
-router.get("/client/geography", getGeography);
+router.get("/products", getProducts);
+router.get("/customers", getCustomers);
+router.get("/transactions", getTransactions);
+router.get("/geography", getGeography);
 
 export default router;

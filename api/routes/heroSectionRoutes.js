@@ -3,21 +3,21 @@ import {
   createHeroSection,
   getAllHeroSections,
   getHeroSectionById,
+  getActiveHeroSectionById,
   updateHeroSection,
-  deleteHeroSection
+  deleteHeroSection,
+  getInactiveHeroSections
 } from '../controllers/heroSection.controller.js';
 
 const router = express.Router();
 
-router
-  .route('/hero-section')
-  .get(getAllHeroSections)       // Get all hero sections
-  .post(createHeroSection);       // Create a new hero section
-
-router
-  .route('/hero-section/:id')
-  .get(getHeroSectionById)        // Get a single hero section by ID
-  .put(updateHeroSection)         // Update a hero section by ID
-  .delete(deleteHeroSection);     // Delete a hero section by ID
+// Get all Define routes
+router.post('/new', createHeroSection);
+router.get('/all-herosections', getAllHeroSections);
+router.get('/inactive', getInactiveHeroSections); // New route for inactive hero sections
+router.get('/:id', getHeroSectionById);
+router.get('/active/:id', getActiveHeroSectionById);
+router.put('/edit/:id', updateHeroSection);
+router.delete('/delete/:id', deleteHeroSection);
 
 export default router;

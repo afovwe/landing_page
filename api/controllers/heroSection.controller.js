@@ -43,17 +43,32 @@ export const createHeroSection = async (req, res) => {
   }
 };
 
-// Get all HeroSe ctions 
+// Get all HeroSections 
 export const getAllHeroSections = async (req, res) => {
   try {
     const heroSections = await HeroSection.find();
     res.status(200).json(heroSections);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Failed to fetch hero sections' });
+    console.error("Error in getAllHeroSections:", error);
+    res.status(500).json({ message: 'Failed to fetch hero sections', error: error.message });
   }
 };
 
+
+
+// Get an active HeroSection by ID (where active status is true)
+export const getActiveHeroSectionById = async (req, res) => {
+  try {
+    const activeHeroSection = await HeroSection.findOne({ _id: req.params.id, active: true });
+    if (!activeHeroSection) {
+      return res.status(404).json({ message: 'Active hero section not found' });
+    }
+    res.status(200).json(activeHeroSection);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to fetch active hero section' });
+  }
+};
 // Get a single HeroSection by ID
 export const getHeroSectionById = async (req, res) => {
   try {
@@ -97,5 +112,16 @@ export const deleteHeroSection = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Failed to delete hero section' });
+  }
+};
+
+// Get all HeroSections with active status set to false
+export const getInactiveHeroSections = async (req, res) => {
+  try {
+    const inactiveHeroSections = await HeroSection.find({ active: false });
+    res.status(200).json(inactiveHeroSections);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to fetch inactive hero sections' });
   }
 };
