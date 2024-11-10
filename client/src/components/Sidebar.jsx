@@ -98,6 +98,11 @@ const navItems = [
     text: "Manage",
     icon: <AdminPanelSettingsOutlined />,
   },
+ 
+  {
+    text: "Popular-products",
+    icon: <ShoppingCartOutlined />,
+  },
 ];
 
 const Sidebar = ({
