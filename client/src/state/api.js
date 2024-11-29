@@ -16,7 +16,8 @@ export const api = createApi({
     "CreateHeroSection",
     "HeroSection", 
     "ActiveHeroSection",
-    "InactiveHeroSection"
+    "InactiveHeroSection",
+    "MobileNavigation"
   ],
   endpoints: (build) => ({
     getUser: build.query({
@@ -83,6 +84,26 @@ export const api = createApi({
       query: () => "api/herosections/inactive", 
       providesTags: ["InactiveHeroSection"],
     }),
+    getMobileNavigation: build.query({
+      query: () => "api/navigation/mobile",
+      providesTags: ["MobileNavigation"],
+    }),
+    updateMobileNavigation: build.mutation({
+      query: (data) => ({
+        url: "api/navigation/mobile",
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["MobileNavigation"],
+    }),
+    toggleMobileNavigation: build.mutation({
+      query: (isOpen) => ({
+        url: "api/navigation/mobile/toggle",
+        method: "POST",
+        body: { isOpen },
+      }),
+      invalidatesTags: ["MobileNavigation"],
+    }),
   }),
 });
 
@@ -97,8 +118,11 @@ export const {
   useGetUserPerformanceQuery,
   useGetDashboardQuery,
   useGetCreateHeroSectionQuery,
-  useGetHeroSectionsQuery,       // Standardized to avoid redundancy
+  useGetHeroSectionsQuery,       
   useGetHeroSectionByIdQuery,
   useGetActiveHeroSectionByIdQuery,
   useGetInactiveHeroSectionsQuery,
+  useGetMobileNavigationQuery,
+  useUpdateMobileNavigationMutation,
+  useToggleMobileNavigationMutation,
 } = api;

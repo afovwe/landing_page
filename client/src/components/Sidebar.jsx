@@ -100,7 +100,7 @@ const navItems = [
   },
  
   {
-    text: "Popular-products",
+    text: "Popular Products",
     icon: <ShoppingCartOutlined />,
   },
 ];
@@ -172,7 +172,8 @@ const Sidebar = ({
                     </Typography>
                   );
                 }
-                const lcText = text.toLowerCase();
+               
+                const lcText = text.toLowerCase().replace(/\s+/g, '-');
 
                 return (
                   <ListItem key={text} disablePadding>
