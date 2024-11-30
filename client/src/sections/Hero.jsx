@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button, ShoeCard } from "../components";
 import { arrowRight } from "../assets/icons";
 import { useGetActiveHeroSectionByIdQuery } from "../state/api";
+import Spinner from "../components/Spinner";
 
 const Hero = () => {
   const { data: activeHeroSectionData, isLoading: isLoadingActiveHeroSection, error: activeHeroSectionError } = useGetActiveHeroSectionByIdQuery();
@@ -19,7 +20,7 @@ const Hero = () => {
   }, [activeHeroSectionData]);
 
   if (isLoadingActiveHeroSection || !activeHeroSectionData) {
-    return <p className="text-center">Loading...</p>;
+    return <Spinner />;
   }
 
   return (
