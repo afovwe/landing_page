@@ -62,22 +62,18 @@ export const api = createApi({
     }),
     getCreateHeroSection: build.query({
       query: () => "api/herosections/new", 
-      providesTags: ["CreateHeroSection"], // Add this line for tag consistency
+      providesTags: ["CreateHeroSection"],
     }),
     getHeroSections: build.query({
       query: () => "api/herosections/all-herosections", 
-      providesTags: ["HeroSection"], // Unified tag for consistency
+      providesTags: ["HeroSection"],
     }),
     getHeroSectionById: build.query({
       query: (id) => `api/herosections/${id}`, 
       providesTags: ["HeroSection"],
     }),
-  /*   getActiveHeroSectionById: build.query({ //herosections/active/
-      query: (id) => `api/herosections/active/${id}`, 
-      providesTags: ["ActiveHeroSection"],
-    }), */
     getActiveHeroSectionById: build.query({
-      query: () => "api/herosections",  // Fetch the active hero section (no id needed)
+      query: () => "api/herosections",  // Fetch the active hero section
       providesTags: ["ActiveHeroSection"], 
     }),
     getInactiveHeroSections: build.query({
