@@ -17,7 +17,8 @@ export const api = createApi({
     "HeroSection", 
     "ActiveHeroSection",
     "InactiveHeroSection",
-    "MobileNavigation"
+    "MobileNavigation",
+    "PopularProducts"
   ],
   endpoints: (build) => ({
     getUser: build.query({
@@ -100,6 +101,10 @@ export const api = createApi({
       }),
       invalidatesTags: ["MobileNavigation"],
     }),
+    getPopularProducts: build.query({
+      query: () => "api/popular-products/active",
+      providesTags: ["PopularProducts"],
+    }),
   }),
 });
 
@@ -121,4 +126,5 @@ export const {
   useGetMobileNavigationQuery,
   useUpdateMobileNavigationMutation,
   useToggleMobileNavigationMutation,
+  useGetPopularProductsQuery,
 } = api;
