@@ -5,15 +5,33 @@ import Spinner from "../components/Spinner";
 const PopularProducts = () => {
   const { data: popularProductsData, isLoading } = useGetPopularProductsQuery();
 
+  // Function to split title and render with middle word highlighted
+  const renderTitle = (title) => {
+    if (!title) return null;
+    
+    const words = title.split(' ');
+    if (words.length === 3) {
+      return (
+        <>
+          {words[0]}{' '}
+          <span className='text-coral-red'>{words[1]}</span>{' '}
+          {words[2]}
+        </>
+      );
+    }
+    return title; // Fallback to original title if not 3 words
+  };
+
   if (isLoading) return <Spinner />;
 
   return (
     <section id='products' className='max-container max-sm:mt-12'>
       <div className='flex flex-col justify-start gap-5'>
         <h2 className='text-4xl font-palanquin font-bold'>
-          {popularProductsData?.title || (
+          {popularProductsData?.title ? 
+            renderTitle(popularProductsData.title) : 
             <>Our <span className='text-coral-red'>Popular</span> Products</>
-          )}
+          }
         </h2>
         <p className='lg:max-w-lg mt-2 font-montserrat text-slate-gray'>
           {popularProductsData?.description || 
