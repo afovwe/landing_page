@@ -18,7 +18,8 @@ export const api = createApi({
     "ActiveHeroSection",
     "InactiveHeroSection",
     "MobileNavigation",
-    "PopularProducts"
+    "PopularProducts",
+    "SuperQuality"
   ],
   endpoints: (build) => ({
     getUser: build.query({
@@ -105,6 +106,10 @@ export const api = createApi({
       query: () => "api/popular-products/active",
       providesTags: ["PopularProducts"],
     }),
+    getActiveSuperQuality: build.query({
+      query: () => "api/super-quality/active",
+      providesTags: ["SuperQuality"],
+    }),
   }),
 });
 
@@ -127,4 +132,5 @@ export const {
   useUpdateMobileNavigationMutation,
   useToggleMobileNavigationMutation,
   useGetPopularProductsQuery,
+  useGetActiveSuperQualityQuery,
 } = api;

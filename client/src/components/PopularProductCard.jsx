@@ -1,13 +1,35 @@
 import { star } from "../assets/icons";
 
-const PopularProductCard = ({ imgURL, name, price }) => {
+const PopularProductCard = ({ imgURL, name, price, rating }) => {
+  // Function to determine number of stars based on rating
+  const getStarCount = (rating) => {
+    if (rating >= 4.5) return 5;
+    if (rating >= 3.5) return 4;
+    if (rating >= 2.5) return 3;
+    if (rating >= 1.5) return 2;
+    return 1;
+  };
+
+  // Get the number of stars to display
+  const numberOfStars = getStarCount(rating);
+
   return (
     <div className='flex flex-1 flex-col w-full max-sm:w-full'>
-      <img src={imgURL} alt={name} className='w-[282px] h-[282px]' />
+      <img src={imgURL} alt={name} className='w-[280px] h-[280px]' />
       <div className='mt-8 flex justify-start gap-2.5'>
-        <img src={star} alt='rating icon' width={24} height={24} />
+        <div className="flex gap-1">
+          {[...Array(numberOfStars)].map((_, index) => (
+            <img 
+              key={index} 
+              src={star} 
+              alt='rating star' 
+              width={24} 
+              height={24} 
+            />
+          ))}
+        </div>
         <p className='font-montserrat text-xl leading-normal text-slate-gray'>
-          (4.5)
+          ({rating})
         </p>
       </div>
       <h3 className='mt-2 text-2xl leading-normal font-semibold font-palanquin'>

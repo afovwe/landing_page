@@ -17,6 +17,7 @@ import navigationRouter from './routes/navigation.route.js';
 
 import heroSectionRoutes from './routes/heroSectionRoutes.js';
 import popularProductRoutes from './routes/popularProducts.js';
+import superQualityRoutes from './routes/superQuality.js';
 //import seedTransactions from './routes/seedTransactions.js'
 //for data bck insert
 //import seedProduct from "./routes/seedProduct.js"; 
@@ -83,6 +84,7 @@ app.use('/api/management', managementRoutes);
 app.use('/api/sales', salesRoutes);
 app.use('/api/herosections', heroSectionRoutes);
 app.use('/api/popular-products', popularProductRoutes);
+app.use('/api/super-quality', superQualityRoutes);
 // Use the Popular Products routes
 
 //app.use('/api/popularproducts', popularProductsRoutes);

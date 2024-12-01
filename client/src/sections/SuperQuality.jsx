@@ -1,7 +1,25 @@
-import { shoe8 } from "../assets/images";
 import { Button } from "../components";
+import { useGetActiveSuperQualityQuery } from "../state/api";
+import Spinner from "../components/Spinner";
 
 const SuperQuality = () => {
+  const { data: superQualityData, isLoading } = useGetActiveSuperQualityQuery();
+
+  // Function to split description into two paragraphs
+  const splitDescription = (description) => {
+    if (!description) return { firstPart: "", secondPart: "" };
+    const parts = description.split('.');
+    return {
+      firstPart: parts[0] + '.',
+      secondPart: parts.slice(1).join('.').trim()
+    };
+  };
+
+  // Split the description
+  const { firstPart, secondPart } = splitDescription(superQualityData?.description);
+
+  if (isLoading) return <Spinner />;
+
   return (
     <section
       id='about-us'
@@ -14,12 +32,10 @@ const SuperQuality = () => {
           <span className='text-coral-red'>Quality </span> Shoes
         </h2>
         <p className='mt-4 lg:max-w-lg info-text'>
-          Ensuring premium comfort and style, our meticulously crafted footwear
-          is designed to elevate your experience, providing you with unmatched
-          quality, innovation, and a touch of elegance.
+          {firstPart}
         </p>
         <p className='mt-6 lg:max-w-lg info-text'>
-          Our dedication to detail and excellence ensures your satisfaction
+          {secondPart}
         </p>
         <div className='mt-11'>
           <Button label='View details' />
@@ -28,7 +44,7 @@ const SuperQuality = () => {
 
       <div className='flex-1 flex justify-center items-center'>
         <img
-          src={shoe8}
+          src={superQualityData?.src}
           alt='product detail'
           width={570}
           height={522}
