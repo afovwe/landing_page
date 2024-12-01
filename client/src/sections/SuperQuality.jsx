@@ -5,7 +5,32 @@ import Spinner from "../components/Spinner";
 const SuperQuality = () => {
   const { data: superQualityData, isLoading } = useGetActiveSuperQualityQuery();
 
-  // Function to split description into two paragraphs
+  // Function to split title into parts
+  const renderTitle = (title) => {
+    if (!title) return null;
+    
+    const words = title.split(' ');
+    const superIndex = words.findIndex(word => word.toLowerCase() === 'super');
+    
+    if (superIndex !== -1) {
+      const firstPart = words.slice(0, superIndex).join(' ');
+      const secondPart = words[superIndex]; // "Super"
+      const thirdPart = words[superIndex + 1]; // "Quality"
+      const fourthPart = words.slice(superIndex + 2).join(' ');
+
+      return (
+        <>
+          {firstPart}{' '}
+          <span className='text-coral-red'>{secondPart}</span>{' '}
+          <span className='text-coral-red'>{thirdPart}</span>{' '}
+          {fourthPart}
+        </>
+      );
+    }
+    return title;
+  };
+
+  // Split the description
   const splitDescription = (description) => {
     if (!description) return { firstPart: "", secondPart: "" };
     const parts = description.split('.');
@@ -15,7 +40,6 @@ const SuperQuality = () => {
     };
   };
 
-  // Split the description
   const { firstPart, secondPart } = splitDescription(superQualityData?.description);
 
   if (isLoading) return <Spinner />;
@@ -27,9 +51,15 @@ const SuperQuality = () => {
     >
       <div className='flex flex-1 flex-col'>
         <h2 className='font-palanquin capitalize text-4xl lg:max-w-lg font-bold'>
-          We Provide You
-          <span className='text-coral-red'> Super </span>
-          <span className='text-coral-red'>Quality </span> Shoes
+          {superQualityData?.title ? 
+            renderTitle(superQualityData.title) : 
+            <>
+              We Provide You{' '}
+              <span className='text-coral-red'>Super</span>{' '}
+              <span className='text-coral-red'>Quality</span>{' '}
+              Shoes
+            </>
+          }
         </h2>
         <p className='mt-4 lg:max-w-lg info-text'>
           {firstPart}
