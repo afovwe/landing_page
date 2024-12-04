@@ -4,7 +4,8 @@ import {
     createSubscribe,
     updateSubscribe,
     deleteSubscribe,
-    handleSubscription
+    handleSubscription,
+    getSignups
 } from '../controllers/subscribe.js';
 
 const router = express.Router();
@@ -23,5 +24,8 @@ router.delete('/delete/:id', deleteSubscribe);
 
 // Add subscription handling route
 router.post('/subscribe-email', handleSubscription);
+
+// Get all signups
+router.get('/signups', getSignups);
 
 export default router; 

@@ -30,12 +30,13 @@ export const sendSubscriptionEmail = (toEmail) => {
             }
             .button {
               background-color: #FF6452;
-              color: white;
+              color: #FFFFFF;
               padding: 10px 20px;
               text-decoration: none;
               border-radius: 5px;
               display: inline-block;
               margin: 20px 0;
+              font-weight: bold;
             }
           </style>
         </head>

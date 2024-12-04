@@ -1,29 +1,22 @@
 import { useState } from 'react';
 import { Button } from "../components";
-import { useGetActiveSubscribeQuery } from "../state/api";
+import { useGetActiveSubscribeQuery, useCreateSignupMutation } from "../state/api";
 import Spinner from "../components/Spinner";
 
 const Subscribe = () => {
   const { data: subscribeData, isLoading } = useGetActiveSubscribeQuery();
+  const [createSignup, { isLoading: isSubmitting }] = useCreateSignupMutation();
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/subscribe/subscribe-email`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await response.json();
-      setMessage(data.message);
+      const response = await createSignup(email).unwrap();
+      setMessage(response.message);
       setEmail('');
     } catch (error) {
-      setMessage('Subscription failed. Please try again.');
+      setMessage(error.data?.message || 'Subscription failed. Please try again.');
     }
   };
 
@@ -72,17 +65,21 @@ const Subscribe = () => {
           placeholder={subscribeData?.placeHolderText || "subscribe@nike.com"}
           className='input'
           required
+          disabled={isSubmitting}
         />
         <div className='flex max-sm:justify-end items-center max-sm:w-full'>
           <Button 
-            label={subscribeData?.buttonText || "Sign Up"} 
+            label={isSubmitting ? "Signing up..." : (subscribeData?.buttonText || "Sign Up")}
             type="submit"
             fullWidth 
+            disabled={isSubmitting}
           />
         </div>
       </form>
       {message && (
-        <p className='text-center text-coral-red mt-2'>{message}</p>
+        <p className={`text-center ${message.includes('successful') ? 'text-green-600' : 'text-coral-red'} mt-2`}>
+          {message}
+        </p>
       )}
     </section>
   );

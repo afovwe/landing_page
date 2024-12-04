@@ -130,6 +130,18 @@ export const api = createApi({
       query: () => "api/subscribe/active",
       providesTags: ["Subscribe"],
     }),
+    getAllSignups: build.query({
+      query: () => "api/subscribe/signups",
+      providesTags: ["Subscribe"],
+    }),
+    createSignup: build.mutation({
+      query: (email) => ({
+        url: "api/subscribe/subscribe-email",
+        method: "POST",
+        body: { email },
+      }),
+      invalidatesTags: ["Subscribe"],
+    }),
   }),
 });
 
@@ -157,4 +169,6 @@ export const {
   useGetActiveSpecialOfferQuery,
   useGetActiveCustomerReviewsQuery,
   useGetActiveSubscribeQuery,
+  useGetAllSignupsQuery,
+  useCreateSignupMutation,
 } = api;
