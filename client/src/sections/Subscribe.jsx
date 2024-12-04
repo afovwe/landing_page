@@ -1,9 +1,31 @@
+import { useState } from 'react';
 import { Button } from "../components";
 import { useGetActiveSubscribeQuery } from "../state/api";
 import Spinner from "../components/Spinner";
 
 const Subscribe = () => {
   const { data: subscribeData, isLoading } = useGetActiveSubscribeQuery();
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`${import.meta.env.VITE_REACT_APP_BASE_URL}/api/subscribe/subscribe-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+      setMessage(data.message);
+      setEmail('');
+    } catch (error) {
+      setMessage('Subscription failed. Please try again.');
+    }
+  };
 
   // Function to split title and highlight "Updates"
   const renderTitle = (title) => {
@@ -42,19 +64,26 @@ const Subscribe = () => {
         }
       </h3>
 
-      <div className='lg:max-w-[40%] w-full flex items-center max-sm:flex-col gap-5 p-2.5 sm:border sm:border-slate-gray rounded-full'>
+      <form onSubmit={handleSubmit} className='lg:max-w-[40%] w-full flex items-center max-sm:flex-col gap-5 p-2.5 sm:border sm:border-slate-gray rounded-full'>
         <input
-          type='text'
+          type='email'
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           placeholder={subscribeData?.placeHolderText || "subscribe@nike.com"}
           className='input'
+          required
         />
         <div className='flex max-sm:justify-end items-center max-sm:w-full'>
           <Button 
             label={subscribeData?.buttonText || "Sign Up"} 
+            type="submit"
             fullWidth 
           />
         </div>
-      </div>
+      </form>
+      {message && (
+        <p className='text-center text-coral-red mt-2'>{message}</p>
+      )}
     </section>
   );
 };

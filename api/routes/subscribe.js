@@ -3,7 +3,8 @@ import {
     getActiveSubscribe,
     createSubscribe,
     updateSubscribe,
-    deleteSubscribe
+    deleteSubscribe,
+    handleSubscription
 } from '../controllers/subscribe.js';
 
 const router = express.Router();
@@ -19,5 +20,8 @@ router.put('/update/:id', updateSubscribe);
 
 // Delete a subscribe section
 router.delete('/delete/:id', deleteSubscribe);
+
+// Add subscription handling route
+router.post('/subscribe-email', handleSubscription);
 
 export default router; 

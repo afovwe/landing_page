@@ -1,4 +1,5 @@
 import Subscribe from "../models/Subscribe.js";
+import { sendSubscriptionEmail } from "../utils/emailService.js";
 
 export const getActiveSubscribe = async (req, res) => {
     try {
@@ -82,6 +83,26 @@ export const deleteSubscribe = async (req, res) => {
         res.status(200).json({ message: "Section deleted successfully" });
     } catch (error) {
         console.error("Error in deleteSubscribe:", error);
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const handleSubscription = async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        if (!email) {
+            return res.status(400).json({ message: "Email is required" });
+        }
+
+        // Send welcome email
+        await sendSubscriptionEmail(email);
+
+        res.status(200).json({ 
+            message: "Subscription successful! Please check your email." 
+        });
+    } catch (error) {
+        console.error("Error in handleSubscription:", error);
         res.status(500).json({ message: error.message });
     }
 }; 
