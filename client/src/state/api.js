@@ -19,7 +19,10 @@ export const api = createApi({
     "InactiveHeroSection",
     "MobileNavigation",
     "PopularProducts",
-    "SuperQuality"
+    "SuperQuality",
+    "Services",
+    "SpecialOffer",
+    "CustomerReviews"
   ],
   endpoints: (build) => ({
     getUser: build.query({
@@ -110,6 +113,18 @@ export const api = createApi({
       query: () => "api/super-quality/active",
       providesTags: ["SuperQuality"],
     }),
+    getActiveServices: build.query({
+      query: () => "api/services/active",
+      providesTags: ["Services"],
+    }),
+    getActiveSpecialOffer: build.query({
+      query: () => "api/special-offer/active",
+      providesTags: ["SpecialOffer"],
+    }),
+    getActiveCustomerReviews: build.query({
+      query: () => "api/customer-reviews/active",
+      providesTags: ["CustomerReviews"],
+    }),
   }),
 });
 
@@ -133,4 +148,7 @@ export const {
   useToggleMobileNavigationMutation,
   useGetPopularProductsQuery,
   useGetActiveSuperQualityQuery,
+  useGetActiveServicesQuery,
+  useGetActiveSpecialOfferQuery,
+  useGetActiveCustomerReviewsQuery,
 } = api;

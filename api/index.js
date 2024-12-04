@@ -18,6 +18,9 @@ import navigationRouter from './routes/navigation.route.js';
 import heroSectionRoutes from './routes/heroSectionRoutes.js';
 import popularProductRoutes from './routes/popularProducts.js';
 import superQualityRoutes from './routes/superQuality.js';
+import serviceRoutes from './routes/service.js';
+import specialOfferRoutes from './routes/specialOffer.js';
+import customerReviewRoutes from './routes/customerReview.js';
 //import seedTransactions from './routes/seedTransactions.js'
 //for data bck insert
 //import seedProduct from "./routes/seedProduct.js"; 
@@ -34,21 +37,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(helmet());
-app.use(helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", "'unsafe-inline'"], // Adjust this as needed
-        styleSrc: ["'self'", "'unsafe-inline'"],  // Adjust this as needed
-        imgSrc: ["'self'", "https://res.cloudinary.com", "data:"],
-        connectSrc: ["'self'"],
-        fontSrc: ["'self'", "https://fonts.gstatic.com"], // Adjust for any external fonts
-        objectSrc: ["'none'"],
-        upgradeInsecureRequests: [],
-      },
-    },
-    crossOriginEmbedderPolicy: false,
-  }));
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan('common'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -85,6 +74,9 @@ app.use('/api/sales', salesRoutes);
 app.use('/api/herosections', heroSectionRoutes);
 app.use('/api/popular-products', popularProductRoutes);
 app.use('/api/super-quality', superQualityRoutes);
+app.use('/api/services', serviceRoutes);
+app.use('/api/special-offer', specialOfferRoutes);
+app.use('/api/customer-reviews', customerReviewRoutes);
 // Use the Popular Products routes
 
 //app.use('/api/popularproducts', popularProductsRoutes);
