@@ -21,6 +21,7 @@ import superQualityRoutes from './routes/superQuality.js';
 import serviceRoutes from './routes/service.js';
 import specialOfferRoutes from './routes/specialOffer.js';
 import customerReviewRoutes from './routes/customerReview.js';
+import subscribeRoutes from './routes/subscribe.js';
 //import seedTransactions from './routes/seedTransactions.js'
 //for data bck insert
 //import seedProduct from "./routes/seedProduct.js"; 
@@ -77,6 +78,7 @@ app.use('/api/super-quality', superQualityRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/special-offer', specialOfferRoutes);
 app.use('/api/customer-reviews', customerReviewRoutes);
+app.use('/api/subscribe', subscribeRoutes);
 // Use the Popular Products routes
 
 //app.use('/api/popularproducts', popularProductsRoutes);

@@ -22,7 +22,8 @@ export const api = createApi({
     "SuperQuality",
     "Services",
     "SpecialOffer",
-    "CustomerReviews"
+    "CustomerReviews",
+    "Subscribe"
   ],
   endpoints: (build) => ({
     getUser: build.query({
@@ -125,6 +126,10 @@ export const api = createApi({
       query: () => "api/customer-reviews/active",
       providesTags: ["CustomerReviews"],
     }),
+    getActiveSubscribe: build.query({
+      query: () => "api/subscribe/active",
+      providesTags: ["Subscribe"],
+    }),
   }),
 });
 
@@ -151,4 +156,5 @@ export const {
   useGetActiveServicesQuery,
   useGetActiveSpecialOfferQuery,
   useGetActiveCustomerReviewsQuery,
+  useGetActiveSubscribeQuery,
 } = api;
