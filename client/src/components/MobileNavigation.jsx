@@ -3,15 +3,18 @@ import { useGetMobileNavigationQuery, useToggleMobileNavigationMutation } from '
 import { hamburger } from '../assets/icons';
 
 const navLinks = [
-  { label: "Home", path: "home" },
-  { label: "Popular Products", path: "products" },
-  { label: "About Us", path: "about-us" },
-  { label: "Contact Us", path: "contact-us" },
+  { label: "Home", path: "hero" },
+  { label: "Popular Products", path: "popular-products" },
+  { label: "Super Quality", path: "super-quality" },
+  { label: "Services", path: "services" },
+  { label: "Special Offer", path: "special-offer" },
+  { label: "Reviews", path: "reviews" },
+  { label: "Contact Us", path: "contact-us" }
 ];
 
 const MobileNavigation = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { data, isLoading } = useGetMobileNavigationQuery();
+  const { data } = useGetMobileNavigationQuery();
   const [toggleNavigation] = useToggleMobileNavigationMutation();
 
   const handleToggle = () => {
@@ -63,9 +66,6 @@ const MobileNavigation = () => {
               ×
             </button>
             
-            {/* Debug info */}
-            {isLoading && <p className="text-slate-gray">Loading...</p>}
-           
             {navigationItems.map((item) => (
               <button
                 key={item.path}

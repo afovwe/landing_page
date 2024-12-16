@@ -32,15 +32,15 @@ const SuperQuality = () => {
 
   // Split the description
   const splitDescription = (description) => {
-    if (!description) return { firstParagraph: "", secondParagraph: "" };
+    if (!description) return { firstPart: "", secondPart: "" };
     const parts = description.split('.');
     return {
-      firstParagraph: parts[0] + '.',
-      secondParagraph: parts.slice(1).join('.').trim()
+      firstPart: parts[0] + '.',
+      secondPart: parts.slice(1).join('.').trim()
     };
   };
 
-  const { firstParagraph, secondParagraph } = splitDescription(superQualityData?.description);
+  const { firstPart, secondPart } = splitDescription(superQualityData?.description);
 
   if (isLoading) return <Spinner />;
 
@@ -62,10 +62,10 @@ const SuperQuality = () => {
           }
         </h2>
         <p className='mt-4 lg:max-w-lg info-text'>
-          {firstParagraph}
+          {firstPart}
         </p>
         <p className='mt-6 lg:max-w-lg info-text'>
-          {secondParagraph}
+          {secondPart}
         </p>
         <div className='mt-11'>
           <Button label='View details' />

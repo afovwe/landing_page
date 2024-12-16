@@ -8,7 +8,7 @@ export const getActiveSuperQuality = async (req, res) => {
             const defaultSection = {
                 title: "We Provide You Super Quality Shoes",
                 description: "Ensuring premium comfort and style, our meticulously crafted footwear is designed to elevate your experience, providing you with unmatched quality, innovation, and a touch of elegance.",
-                src: "https://asset.cloudinary.com/dc0oesxvf/eadc451e2ed296ac7c454f185a75d625"
+                src: "https://your-default-image-url.com"
             };
             return res.status(200).json(defaultSection);
         }

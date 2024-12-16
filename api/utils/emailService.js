@@ -13,9 +13,9 @@ export const sendSubscriptionEmail = (toEmail) => {
   });
 
   const mailOptions = {
-    from: 'nike.updates@nike.com',
+    from: 'afovwe@gmail.com',
     to: toEmail,
-    subject: 'Welcome to Nike Updates & Newsletter',
+    subject: 'Welcome to Our Update & Newsletter',
     html: `
       <html>
         <head>
@@ -51,7 +51,7 @@ export const sendSubscriptionEmail = (toEmail) => {
               <li>Special discounts</li>
               <li>Early access to sales</li>
             </ul>
-            <a href="https://nike.com/shop" class="button">Start Shopping</a>
+            <a href="https://product-landing-page-8qc8.onrender.com/" class="button">Start Shopping</a>
             <p>If you have any questions, please contact our support team.</p>
             <p>Best regards,<br>The Nike Team</p>
           </div>
