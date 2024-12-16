@@ -1,5 +1,6 @@
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@clerk/clerk-react";
 import { profileImage } from "../assets/images";
 import {
   LightModeOutlined,
@@ -10,8 +11,8 @@ import {
   ArrowDropDownOutlined,
 } from "@mui/icons-material";
 import FlexBetween from "../components/FlexBetween";
-import { useDispatch } from "react-redux"; // Already imported
-import { setMode } from "../state"; // Assuming setMode is an action
+import { useDispatch } from "react-redux";
+import { setMode } from "../state";
 
 import {
   AppBar,
@@ -23,15 +24,28 @@ import {
   Toolbar,
   Menu,
   MenuItem,
-  useTheme, // Import useTheme
+  useTheme,
 } from "@mui/material";
+
 const DashboardNavBar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
-  const theme = useTheme(); // Get the theme object
-  const dispatch = useDispatch(); // Initialize dispatch
+  const theme = useTheme();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { signOut } = useAuth();
   const [anchorEl, setAnchorEl] = useState(null);
   const isOpen = Boolean(anchorEl);
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
+
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      handleClose();
+      navigate('/');
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
 
   return (
     <AppBar
@@ -48,7 +62,7 @@ const DashboardNavBar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
             <MenuIcon />
           </IconButton>
           <FlexBetween
-            backgroundColor={theme.palette.background.alt} // Use theme object here
+            backgroundColor={theme.palette.background.alt}
             borderRadius="9px"
             gap="3rem"
             p="0.1rem 1.5rem"
@@ -62,7 +76,6 @@ const DashboardNavBar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
 
         {/* RIGHT SIDE */}
         <FlexBetween gap="1.5rem">
-          
           <IconButton onClick={() => dispatch(setMode())}>
             {theme.palette.mode === "dark" ? (
               <DarkModeOutlined sx={{ fontSize: "25px" }} />
@@ -74,7 +87,6 @@ const DashboardNavBar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
             <SettingsOutlined sx={{ fontSize: "25px" }} />
           </IconButton>
           <FlexBetween>
-            
             <Button
               onClick={handleClick}
               sx={{
@@ -119,7 +131,7 @@ const DashboardNavBar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
               onClose={handleClose}
               anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
             >
-              <MenuItem onClick={handleClose}>Log Out</MenuItem>
+              <MenuItem onClick={handleLogout}>Log Out</MenuItem>
             </Menu>
           </FlexBetween>
         </FlexBetween>
@@ -127,6 +139,5 @@ const DashboardNavBar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
     </AppBar>
   );
 };
-
 
 export default DashboardNavBar;

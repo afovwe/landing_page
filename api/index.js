@@ -14,6 +14,7 @@ import generalRoutes from './routes/general.js';
 import managementRoutes from './routes/management.js';
 import salesRoutes from './routes/sales.js';
 import navigationRouter from './routes/navigation.route.js';
+import authRouter from './routes/auth.route.js';
 
 import heroSectionRoutes from './routes/heroSectionRoutes.js';
 import popularProductRoutes from './routes/popularProducts.js';
@@ -82,8 +83,10 @@ app.use(express.static(path.join(__dirname, '/client/dist')));
 
 // Use routes
 
-app.use('/api', userRouter);
-app.use('/api', navigationRouter);
+
+app.use('/api/auth', authRouter);
+app.use('/api/users', userRouter);
+app.use('/api/navigation', navigationRouter);
 app.use('/api/client', clientRoutes);
 app.use('/api/general', generalRoutes);
 app.use('/api/management', managementRoutes);

@@ -1,229 +1,115 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {  createBrowserRouter, RouterProvider } from 'react-router-dom';
-//import router from './routes';
-
-import './index.css';
-import App from './App';
-import { configureStore } from "@reduxjs/toolkit";
-import globalReducer from "./state";
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from "react-redux";
-//import Dashboard from './scenes/dashboard/Dashboard';
-import Layout from './scenes/layout';
-import ProfilePage from './pages/ProfilePage';
-import NotFound from './pages/NotFound';
-import Profile from './pages/Profile';
-//import DashboardItem from './pages/DashboardItem';
-import Products from './scenes/products';
+import { configureStore } from "@reduxjs/toolkit";
+import { ClerkProvider } from '@clerk/clerk-react';
+import globalReducer from "./state";
+import authReducer from './state/authSlice';
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { api } from "./state/api";
+import ClerkAuthProvider from './components/ClerkAuthProvider';
+import PrivateRoute from './components/PrivateRoute';
+import './index.css';
+
+// Import your components
+import App from './App';
+import Layout from './scenes/layout';
+import Dashboard from './scenes/dashboard';
+import Products from './scenes/products';
 import Customers from './scenes/customers';
-import Admin from './scenes/admin';
-import Transactions from './scenes/transactions';
-import Geography from './scenes/geography';
 import Overview from './scenes/overview';
 import Daily from './scenes/daily';
 import Monthly from './scenes/monthly';
 import Breakdown from './scenes/breakdown';
-import Performance from './scenes/performance'; 
-import Dashboard from './scenes/dashboard';
-import { ClerkProvider } from '@clerk/clerk-react'
+import Admin from './scenes/admin';
+import Performance from './scenes/performance';
+import Transactions from './scenes/transactions';
+import Geography from './scenes/geography';
+import NotFound from './pages/NotFound';
 import HeroAdminSection from './scenes/manage_hero_section';
 import PopularProduct from './scenes/popular_product';
 
-// Import your publishable key
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+// Auth components
+import Login from './scenes/auth/Login';
+import Signup from './scenes/auth/Signup';
+
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 if (!PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key")
 }
+
 const store = configureStore({
   reducer: {
     global: globalReducer,
+    auth: authReducer,
     [api.reducerPath]: api.reducer,
   },
   middleware: (getDefault) => getDefault().concat(api.middleware),
 });
+
 setupListeners(store.dispatch);
 
-
 const router = createBrowserRouter([
-
   {
     path: "/",
-    element: <App />, // The main frontend website component
-  
+    element: <App />,
+    children: [
+      {
+        path: "login",
+        element: <Login />
+      },
+      {
+        path: "signup",
+        element: <Signup />
+      },
+      {
+        path: "verify-email",
+        element: <Signup />
+      },
+      {
+        path: "dashboard",
+        element: (
+          <PrivateRoute>
+            <Layout />
+          </PrivateRoute>
+        ),
+        children: [
+          { path: "", element: <Dashboard /> },
+          { path: "products", element: <Products /> },
+          { path: "customers", element: <Customers /> },
+          { path: "overview", element: <Overview /> },
+          { path: "daily", element: <Daily /> },
+          { path: "monthly", element: <Monthly /> },
+          { path: "breakdown", element: <Breakdown /> },
+          { path: "admin", element: <Admin /> },
+          { path: "performance", element: <Performance /> },
+          { path: "transactions", element: <Transactions /> },
+          { path: "geography", element: <Geography /> },
+          { path: "manage", element: <HeroAdminSection /> },
+          { path: "popular-products", element: <PopularProduct /> }
+        ]
+      }
+    ]
   },
   {
-    path: "/dashboard",
-    element: <Layout />, // Use Layout as the main component for the dashboard
-    children: [
-      {
-        path: "", // Matches "/dashboard"
-        element: <Dashboard />,
-      },
-      /* {
-        path: ":itemId", // Matches "/dashboard/:itemId"
-        element: <DashboardItem />,
-      }, */
-    ],
-  },
-  {
-    path: "/products",
-    element: <Layout />, // Use Layout for the products section
-    children: [
-      {
-        path: "", // Matches "/products"
-        element: <Products />,
-      },
-    ],
-  },
-
-   {
-    path: "/customers",
-    element: <Layout />, // Use Layout for the products section
-    children: [
-      {
-        path: "", // Matches "/customers"
-        element: <Customers />,
-      },
-    ],
-  },
-   {
-    path: "/overview",
-    element: <Layout />, // Use Layout for the products section
-    children: [
-      {
-        path: "", // Matches "/overview"
-        element: <Overview />,
-      },
-    ],
-  },
-  {
-    path: "/daily",
-    element: <Layout />, // Use Layout for the products section
-    children: [
-      {
-        path: "", // Matches "/daily"
-        element: <Daily />,
-      },
-    ],
-  },
-  {
-    path: "/monthly",
-    element: <Layout />, // Use Layout for the products section
-    children: [
-      {
-        path: "", // Matches "/monthly"
-        element: <Monthly />,
-      },
-    ],
-  },
-  {
-    path: "/breakdown",
-    element: <Layout />, // Use Layout for the products section
-    children: [
-      {
-        path: "", // Matches "/breakdown"
-        element: <Breakdown />,
-      },
-    ],
-  },
-  {
-    path: "/admin",
-    element: <Layout />, // Use Layout for the products section
-    children: [
-      {
-        path: "", // Matches "/admin"
-        element: <Admin />,
-      },
-    ],
-  },
-  {
-    path: "/performance",
-    element: <Layout />, // Use Layout for the products section
-    children: [
-      {
-        path: "", // Matches "/customers"
-        element: <Performance />,
-      },
-    ],
-  },
-  {
-    path: "/transactions",
-    element: <Layout />, // Use Layout for the products section
-    children: [
-      {
-        path: "", // Matches "/products"
-        element: <Transactions />,
-      },
-    ],
-  },
-  {
-    path: "/geography",
-    element: <Layout />, // Use Layout for the products section
-    children: [
-      {
-        path: "", // Matches "/products"
-        element: <Geography />,
-      },
-    ],
-  },
-  {
-    path: "/manage",
-    element: <Layout />, // Use Layout for the products section
-    children: [
-      {
-        path: "", // Matches "/products"
-        element: <HeroAdminSection />,
-      },
-      
-    ],
-  },
-  {
-    path: "/popular-products",
-    element: <Layout />, // Use Layout for the products section
-    children: [
-      {
-        path: "", // Matches "/popular-products"
-        element: <PopularProduct />,
-      },      
-    ],
-  },
-  {
-    path: "/profile",
-    element: <Layout />, // Use Layout for the profile section
-    children: [
-      {
-        path: "", // Matches "/profile"
-        element: <ProfilePage />,
-      },
-      {
-        path: ":profileId", // Matches "/profile/:profileId"
-        element: <Profile />,
-      },
-    ],
-  },
-  {
-    path: "*", // Catch-all for any unmatched routes
-    element: <Layout />, // Use Layout for the NotFound page as well
-    children: [
-      {
-        path: "*",
-        element: <NotFound />,
-      },
-    ],
-  },
+    path: "*",
+    element: <NotFound />
+  }
 ]);
-
-
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
-      <Provider store={store}>      
-      <RouterProvider router={router} />
-    </Provider>
-     </ClerkProvider>
-  </React.StrictMode>,
+    <ClerkProvider 
+      publishableKey={PUBLISHABLE_KEY}
+      navigate={(to) => router.navigate(to)}
+    >
+      <Provider store={store}>
+        <ClerkAuthProvider>
+          <RouterProvider router={router} />
+        </ClerkAuthProvider>
+      </Provider>
+    </ClerkProvider>
+  </React.StrictMode>
 );

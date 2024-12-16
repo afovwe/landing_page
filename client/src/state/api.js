@@ -26,6 +26,14 @@ export const api = createApi({
     "Subscribe"
   ],
   endpoints: (build) => ({
+    createUser: build.mutation({
+      query: (userData) => ({
+        url: "/auth/register",
+        method: "POST",
+        body: userData,
+      }),
+      invalidatesTags: ["User"],
+    }),
     getUser: build.query({
       query: (id) => `api/general/user/${id}`,
       providesTags: ["User"],
@@ -146,6 +154,7 @@ export const api = createApi({
 });
 
 export const {
+  useCreateUserMutation,
   useGetUserQuery,
   useGetProductsQuery,
   useGetCustomersQuery,

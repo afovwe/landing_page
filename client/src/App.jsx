@@ -1,14 +1,11 @@
 import { Footer } from './sections';
 import Nav from './components/Nav.jsx';
-import { Hero, PopularProducts, SuperQuality, Services, SpecialOffer, CustomerReviews, Subscribe } from './sections'
+import { Hero, PopularProducts, SuperQuality, Services, SpecialOffer, CustomerReviews, Subscribe } from './sections';
 import MobileNavigation from './components/MobileNavigation';
+import { Outlet, useLocation } from 'react-router-dom';
 
-
-const App = () => (
-  <main className="relative">
-    <Nav />
-    <MobileNavigation />
-    
+const LandingPage = () => (
+  <>
     <section id="hero" className="xl:padding-1 wide:padding-r padding-b">
       <Hero />
     </section>
@@ -30,10 +27,25 @@ const App = () => (
     <section id="contact-us" className="padding-x sm:py-32 py-16 w-full">
       <Subscribe />
     </section>
-    <section className="bg-black padding-x padding-t pb-8">
-      <Footer />
-    </section>
-  </main>
+  </>
 );
+
+function App() {
+  const location = useLocation();
+  const isPublicRoute = ['/', '/login', '/signup'].includes(location.pathname);
+
+  return (
+    <main className="relative">
+      <Nav />
+      {isPublicRoute && <MobileNavigation />}
+      
+      {location.pathname === '/' ? <LandingPage /> : <Outlet />}
+      
+      <section className="bg-black padding-x padding-t pb-8">
+        <Footer />
+      </section>
+    </main>
+  );
+}
 
 export default App;
