@@ -18,31 +18,31 @@ const Login = () => {
 
   // Redirect to dashboard if already signed in
   if (isSignedIn) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to={from} replace />;
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-primary  px-4 py-12 sm:px-6 lg:px-8">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-primary px-4 py-12 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8 mt-10">
-        <SignIn 
-          routing="path" 
-          path="/login" 
+        <SignIn
+          routing="path"
+          path="/login"
           signUpUrl="/signup"
-          redirectUrl={from}
+          fallbackRedirectUrl="/dashboard" // Replaces the deprecated `redirectUrl`
           appearance={{
             elements: {
               rootBox: "mx-auto w-full",
               card: "rounded-xl shadow-lg bg-white p-6",
-              formButtonPrimary: 
+              formButtonPrimary:
                 "bg-coral-red hover:bg-coral-red/90 font-montserrat text-white rounded-full w-full py-3 text-lg font-semibold",
-              formFieldInput: 
+              formFieldInput:
                 "font-montserrat rounded-lg border-slate-200 focus:border-coral-red focus:ring-coral-red w-full py-3 text-base",
-              footerActionLink: 
+              footerActionLink:
                 "text-coral-red hover:text-coral-red/90 font-montserrat",
               dividerLine: "bg-slate-200",
               dividerText: "text-slate-400 font-montserrat",
               formFieldLabel: "font-montserrat text-slate-600",
-              socialButtonsBlockButton: 
+              socialButtonsBlockButton:
                 "border-slate-200 hover:bg-slate-50 font-montserrat w-full",
               socialButtonsBlockButtonText: "font-montserrat text-slate-600",
               formFieldWarning: "font-montserrat text-red-500",
@@ -52,7 +52,7 @@ const Login = () => {
               headerSubtitle: "font-montserrat text-slate-600",
               formButtonReset: "w-full py-3 rounded-full",
               otpCodeFieldInput: "!w-[45px] h-[45px]",
-              logoBox: "hidden"
+              logoBox: "hidden",
             },
             variables: {
               colorPrimary: "#FF6452",

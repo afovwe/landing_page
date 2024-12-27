@@ -36,6 +36,8 @@ import Signup from './scenes/auth/Signup';
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
+
+
 if (!PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key")
 }
@@ -50,6 +52,7 @@ const store = configureStore({
 });
 
 setupListeners(store.dispatch);
+
 
 const router = createBrowserRouter([
   {
@@ -68,36 +71,37 @@ const router = createBrowserRouter([
         path: "verify-email",
         element: <Signup />
       },
-      {
-        path: "dashboard",
-        element: (
-          <PrivateRoute>
-            <Layout />
-          </PrivateRoute>
-        ),
-        children: [
-          { path: "", element: <Dashboard /> },
-          { path: "products", element: <Products /> },
-          { path: "customers", element: <Customers /> },
-          { path: "overview", element: <Overview /> },
-          { path: "daily", element: <Daily /> },
-          { path: "monthly", element: <Monthly /> },
-          { path: "breakdown", element: <Breakdown /> },
-          { path: "admin", element: <Admin /> },
-          { path: "performance", element: <Performance /> },
-          { path: "transactions", element: <Transactions /> },
-          { path: "geography", element: <Geography /> },
-          { path: "manage", element: <HeroAdminSection /> },
-          { path: "popular-products", element: <PopularProduct /> }
-        ]
-      }
-    ]
+    ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <Layout />
+      </PrivateRoute>
+    ),
+    children: [
+      { index: true, element: <Dashboard /> }, // This resolves `/dashboard`
+      { path: "products", element: <Products /> },
+      { path: "customers", element: <Customers /> },
+      { path: "overview", element: <Overview /> },
+      { path: "daily", element: <Daily /> },
+      { path: "monthly", element: <Monthly /> },
+      { path: "breakdown", element: <Breakdown /> },
+      { path: "admin", element: <Admin /> },
+      { path: "performance", element: <Performance /> },
+      { path: "transactions", element: <Transactions /> },
+      { path: "geography", element: <Geography /> },
+      { path: "manage", element: <HeroAdminSection /> },
+      { path: "popular-products", element: <PopularProduct /> },
+    ],
   },
   {
     path: "*",
-    element: <NotFound />
-  }
+    element: <NotFound />,
+  },
 ]);
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
