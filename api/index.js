@@ -15,7 +15,6 @@ import managementRoutes from './routes/management.js';
 import salesRoutes from './routes/sales.js';
 import navigationRouter from './routes/navigation.route.js';
 import authRouter from './routes/auth.route.js';
-
 import heroSectionRoutes from './routes/heroSectionRoutes.js';
 import popularProductRoutes from './routes/popularProducts.js';
 import superQualityRoutes from './routes/superQuality.js';
@@ -23,15 +22,6 @@ import serviceRoutes from './routes/service.js';
 import specialOfferRoutes from './routes/specialOffer.js';
 import customerReviewRoutes from './routes/customerReview.js';
 import subscribeRoutes from './routes/subscribe.js';
-//import seedTransactions from './routes/seedTransactions.js'
-//for data bck insert
-//import seedProduct from "./routes/seedProduct.js"; 
-//import seedProductStat from "./routes/seedProductStat.js";
-//import seedTransactions from "./routes/seedTransactions.js"
-//import { dataOverallStat} from './data/index.js'
-//import OverallStat from './models/ModelOverallStat.js';
-//import seedOverviewStat from "./routes/seedOverviewStat.js"
-//import seedAffilateStat from "./routes/seedAffilate.js"
 
 dotenv.config();
 
@@ -44,27 +34,43 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://clerk.com", "https://*.clerk.com", "https://cdn.jsdelivr.net"],
+        scriptSrc: [
+          "'self'",
+          "'unsafe-inline'",
+          "'unsafe-eval'",
+          "https://clerk.com",
+          "https://*.clerk.com",
+          "https://challenges.cloudflare.com",
+          "https://cdn.jsdelivr.net",
+        ],
+        connectSrc: [
+          "'self'",
+          "https:",
+          "http:",
+          "https://clerk.com",
+          "https://*.clerk.com",
+        ],
+        imgSrc: ["'self'", "data:", "https:", "https://img.clerk.com"],
+        workerSrc: ["'self'", "blob:"],
         styleSrc: ["'self'", "'unsafe-inline'", "https:"],
-        imgSrc: ["'self'", "data:", "https:"],
-        connectSrc: ["'self'", "https:", "http:", "ws:", "wss:", "https://clerk.com", "https://*.clerk.com"],
         fontSrc: ["'self'", "https:", "data:"],
         objectSrc: ["'none'"],
         mediaSrc: ["'self'"],
-        frameSrc: ["'self'", "https://clerk.com", "https://*.clerk.com"],
         baseUri: ["'self'"],
         formAction: ["'self'"],
-        frameAncestors: ["'none'"]
+        frameAncestors: ["'none'"],
+        frameSrc: ["'self'", "https://challenges.cloudflare.com"],
       },
     },
   })
 );
 
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 app.use(morgan('common'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
+
 const port = process.env.PORT || 3000;
 
 // Middleware to parse JSON bodies
@@ -87,8 +93,6 @@ const __dirname = path.resolve();
 app.use(express.static(path.join(__dirname, '/client/dist')));
 
 // Use routes
-
-
 app.use('/api/auth', authRouter);
 app.use('/api/users', userRouter);
 app.use('/api/navigation', navigationRouter);
@@ -103,17 +107,6 @@ app.use('/api/services', serviceRoutes);
 app.use('/api/special-offer', specialOfferRoutes);
 app.use('/api/customer-reviews', customerReviewRoutes);
 app.use('/api/subscribe', subscribeRoutes);
-// Use the Popular Products routes
-
-//app.use('/api/popularproducts', popularProductsRoutes);
-//app.use('/api', seedProduct);
-//app.use('/api', seedProductStat);
-//app.use('/api', seedTransactions);
-//app.use('/api', seedOverviewStat);
-//app.use('/api', seedAffilateStat);
-
-
-
 
 // Serve the index.html file for any other requests
 app.get('*', (req, res) => {
@@ -123,5 +116,4 @@ app.get('*', (req, res) => {
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
-  //OverallStat.insertMany(dataOverallStat);
 });
