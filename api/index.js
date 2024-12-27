@@ -38,23 +38,28 @@ dotenv.config();
 /* CONFIGURATION */
 const app = express();
 app.use(express.json());
+
 app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
         defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://clerk.com", "https://*.clerk.com", "https://cdn.jsdelivr.net"],
         styleSrc: ["'self'", "'unsafe-inline'", "https:"],
         imgSrc: ["'self'", "data:", "https:"],
-        connectSrc: ["'self'", "https:", "http:", "ws:", "wss:"],
+        connectSrc: ["'self'", "https:", "http:", "ws:", "wss:", "https://clerk.com", "https://*.clerk.com"],
         fontSrc: ["'self'", "https:", "data:"],
         objectSrc: ["'none'"],
         mediaSrc: ["'self'"],
-        frameSrc: ["'self'"],
+        frameSrc: ["'self'", "https://clerk.com", "https://*.clerk.com"],
+        baseUri: ["'self'"],
+        formAction: ["'self'"],
+        frameAncestors: ["'none'"]
       },
     },
   })
 );
+
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan('common'));
 app.use(bodyParser.json());
