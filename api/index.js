@@ -28,7 +28,7 @@ dotenv.config();
 /* CONFIGURATION */
 const app = express();
 app.use(express.json());
-
+/* 
 app.use(
   helmet({
     contentSecurityPolicy: {
@@ -64,6 +64,8 @@ app.use(
     },
   })
 );
+ */
+app.use(helmet());
 
 app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 app.use(morgan('common'));
